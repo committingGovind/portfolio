@@ -10,7 +10,10 @@ export function WallSelector() {
             crossOrigin="anonymous"
             className="w-96 h-80 object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-md hover:shadow-slate-100"
           >
-            <source src="src/assets/bill2.mp4" type="video/mp4"></source>
+            <source
+              src="https://videos.pexels.com/video-files/853969/853969-hd_1920_1080_25fps.mp4"
+              type="video/mp4"
+            ></source>
             Your browser does not support the video tag.
           </video>
         </div>
@@ -32,7 +35,10 @@ export function WallSelector() {
             crossOrigin="anonymous"
             className="w-96 h-80 object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-2xl hover:shadow-[#111111]"
           >
-            <source src="src/assets/vid1.mp4" type="video/mp4"></source>
+            <source
+              src="https://videos.pexels.com/video-files/2692693/2692693-hd_1920_1080_25fps.mp4"
+              type="video/mp4"
+            ></source>
             Your browser does not support the video tag.
           </video>
         </div>
@@ -54,7 +60,10 @@ export function WallSelector() {
             crossOrigin="anonymous"
             className="w-96 h-80 object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-2xl hover:shadow-[#111111]"
           >
-            <source src="src/assets/vid2.mp4" type="video/mp4"></source>
+            <source
+              src="https://videos.pexels.com/video-files/2871918/2871918-hd_1920_1080_30fps.mp4"
+              type="video/mp4"
+            ></source>
             Your browser does not support the video tag.
           </video>
         </div>
@@ -76,7 +85,10 @@ export function WallSelector() {
             crossOrigin="anonymous"
             className="w-96 h-80 object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-2xl hover:shadow-[#111111]"
           >
-            <source src="src/assets/vid3.mp4" type="video/mp4"></source>
+            <source
+              src="https://videos.pexels.com/video-files/17823998/17823998-uhd_3840_2026_60fps.mp4"
+              type="video/mp4"
+            ></source>
             Your browser does not support the video tag.
           </video>
         </div>
@@ -98,7 +110,10 @@ export function WallSelector() {
             crossOrigin="anonymous"
             className="w-96 h-80 object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-2xl hover:shadow-[#111111]"
           >
-            <source src="src/assets/xp.mp4" type="video/mp4"></source>
+            <source
+              src="https://videos.pexels.com/video-files/11892851/11892851-hd_1280_720_24fps.mp4"
+              type="video/mp4"
+            ></source>
             Your browser does not support the video tag.
           </video>
         </div>
@@ -120,7 +135,10 @@ export function WallSelector() {
             crossOrigin="anonymous"
             className="w-96 h-80 object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-2xl hover:shadow-[#111111]"
           >
-            <source src="src/assets/field.mp4" type="video/mp4"></source>
+            <source
+              src="https://videos.pexels.com/video-files/2951209/2951209-uhd_3840_2160_30fps.mp4"
+              type="video/mp4"
+            ></source>
             Your browser does not support the video tag.
           </video>
         </div>
