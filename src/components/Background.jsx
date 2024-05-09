@@ -1,29 +1,31 @@
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { wallAtom } from "../store/atoms/wallpaper";
 import { Info } from "./Info";
 import { Intro } from "./Intro";
-import { Video } from "./Video";
-import { WallSelector } from "./WallSelector";
+import { VideoSlides } from "./VideoSlides";
 
 export function Background() {
   const [showDiv, setShowdiv] = useState(false);
+
+  const wallsrc = useRecoilValue(wallAtom);
+
+  console.log("wallsrc value: " + wallsrc);
 
   return (
     <>
       <div className="relative h-screen">
         <video
+          key={wallsrc}
           autoPlay
           loop
           muted
           className="bg-video absolute top-0 left-0 w-full h-full object-cover z-0"
         >
-          <source
-            src="https://videos.pexels.com/video-files/9562220/9562220-hd_1920_1080_30fps.mp4"
-            type="video/mp4"
-          />
+          <source src={wallsrc} type="video/mp4" id="backgroundWall" />
           Your browser does not support the video tag.
         </video>
         <div className="relative z-10">
-          {/* content goes here */}
           <Intro />
           <Info />
           <div className="flex justify-center items-center mt-28">
@@ -40,8 +42,9 @@ export function Background() {
       </div>
       {showDiv && (
         <div className="h-screen">
+          <VideoSlides />
           {/* <Video /> */}
-          <WallSelector />
+          {/* <WallSelector /> */}
         </div>
       )}
     </>
