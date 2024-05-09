@@ -3,7 +3,7 @@ import { videoatom } from "../store/atoms/videos";
 import { wallAtom } from "../store/atoms/wallpaper";
 import { useSetRecoilState } from "recoil";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { RxDotFilled } from "react-icons/rx";
 
 export function VideoSlides() {
@@ -13,6 +13,7 @@ export function VideoSlides() {
 
   const [index, setIndex] = useState(0);
 
+  //buttons to change windows
   const prevSlide = () => {
     const isFirstSlide = index === 0;
 
@@ -33,6 +34,8 @@ export function VideoSlides() {
     setIndex(slideIndex);
   };
 
+  //click handler to change the background of the top element as selected by the user.
+
   const handleClick = (id) => {
     const videoElement = document.getElementById(id);
 
@@ -45,8 +48,44 @@ export function VideoSlides() {
     setWallpaper(srcValue);
   };
 
+  //dynamic background changin code:
+
+  const canvasRef = useRef(null);
+  const [color, setColor] = useState(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const video = document.createElement("video");
+    video.crossOrigin = "anonymous";
+    video.src = videoLinks[index].url;
+    video.addEventListener("loadeddata", () => {
+      const interval = setInterval(async () => {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        await video.play();
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const x = 841; // Specify the x-coordinate
+        const y = 409; // Specify the y-coordinate
+        const colorData = ctx.getImageData(x, y, 1, 1).data;
+        const rgbColor = `rgb(${colorData[0]}, ${colorData[1]}, ${colorData[2]})`;
+        setColor(rgbColor);
+        // document.body.style.backgroundColor = rgbColor;
+        document.getElementById("myDiv").style.backgroundColor = rgbColor;
+      }, 200); // Interval in milliseconds (e.g., every 30 milliseconds)
+      return () => clearInterval(interval);
+    });
+
+    return () => {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    };
+  }, [index]);
+
   return (
     <div id="myDiv" className="transition-colors duration-1000 ease-in-out">
+      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
       <div className="flex justify-center items-center h-screen">
         <div className="relative w-3/4 h-5/6 bg-gray-200 rounded-2xl group">
           <video
