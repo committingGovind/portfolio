@@ -12,8 +12,6 @@ export function WallSelector() {
 
     const srcValue = sourceElement.src;
 
-    console.log("src value:     " + srcValue);
-
     setWallpaper(srcValue);
   };
 

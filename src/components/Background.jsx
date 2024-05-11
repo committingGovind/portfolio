@@ -10,8 +10,6 @@ export function Background() {
 
   const wallsrc = useRecoilValue(wallAtom);
 
-  console.log("wallsrc value: " + wallsrc);
-
   return (
     <>
       <div className="relative h-screen">
