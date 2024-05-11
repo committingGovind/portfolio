@@ -7,9 +7,14 @@ export function Info() {
         </button>
       </div>
       <div>
-        <button className="bg-blue-600 text-white hover:scale-110 transition-transform hover:bg-blue-700 hover:text-white delay-100 ease-in-out text-2xl rounded-lg p-4 m-4">
-          Resume
-        </button>
+        <a
+          href="https://drive.google.com/file/d/1Gi1nfV_38_twcvfphXVpNlvgqEHIKHgy/view?usp=sharing"
+          target="_blank"
+        >
+          <button className="bg-blue-600 text-white hover:scale-110 transition-transform hover:bg-blue-700 hover:text-white delay-100 ease-in-out text-2xl rounded-lg p-4 m-4">
+            Resume
+          </button>
+        </a>
       </div>
       <div className="flex justify-center items-center ml-36">
         <a
