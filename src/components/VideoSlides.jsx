@@ -5,9 +5,11 @@ import { useSetRecoilState } from "recoil";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { useState, useRef, useEffect } from "react";
 import { RxDotFilled } from "react-icons/rx";
+import { backAtom } from "../store/atoms/backround";
 
 export function VideoSlides() {
   const setWallpaper = useSetRecoilState(wallAtom);
+  const setBackground = useSetRecoilState(backAtom);
 
   const videoLinks = useRecoilValue(videoatom);
 
@@ -20,6 +22,8 @@ export function VideoSlides() {
     const newIndex = isFirstSlide ? videoLinks.length - 1 : index - 1;
 
     setIndex(newIndex);
+
+    setBackground(videoLinks[newIndex].url);
   };
 
   const nextSlide = () => {
@@ -28,6 +32,8 @@ export function VideoSlides() {
     const newIndex = isLastSlide ? 0 : index + 1;
 
     setIndex(newIndex);
+
+    setBackground(videoLinks[newIndex].url);
   };
 
   const goToSlide = (slideIndex) => {
@@ -46,46 +52,26 @@ export function VideoSlides() {
     console.log("src value:     " + srcValue);
 
     setWallpaper(srcValue);
+
+    // document.body.scrollTop = 0;
+    // document.documentElement.scrollTop = 0;
+    const scrollHeight = window.scrollY,
+      scrollStep = Math.PI / (1000 / 10),
+      cosParameter = scrollHeight / 2;
+    let scrollCount = 0,
+      scrollMargin,
+      scrollInterval = setInterval(function () {
+        if (window.scrollY != 0) {
+          scrollCount = scrollCount + 1;
+          scrollMargin =
+            cosParameter - cosParameter * Math.cos(scrollCount * scrollStep);
+          window.scrollTo(0, scrollHeight - scrollMargin);
+        } else clearInterval(scrollInterval);
+      }, 10);
   };
-
-  //dynamic background changin code:
-
-  const canvasRef = useRef(null);
-  const [color, setColor] = useState(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const video = document.createElement("video");
-    video.crossOrigin = "anonymous";
-    video.src = videoLinks[index].url;
-    video.addEventListener("loadeddata", () => {
-      const interval = setInterval(async () => {
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        await video.play();
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const x = 841; // Specify the x-coordinate
-        const y = 409; // Specify the y-coordinate
-        const colorData = ctx.getImageData(x, y, 1, 1).data;
-        const rgbColor = `rgb(${colorData[0]}, ${colorData[1]}, ${colorData[2]})`;
-        setColor(rgbColor);
-        // document.body.style.backgroundColor = rgbColor;
-        document.getElementById("myDiv").style.backgroundColor = rgbColor;
-      }, 200); // Interval in milliseconds (e.g., every 30 milliseconds)
-      return () => clearInterval(interval);
-    });
-
-    return () => {
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
-    };
-  }, [index]);
 
   return (
     <div id="myDiv" className="transition-colors duration-1000 ease-in-out">
-      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
       <div className="flex justify-center items-center h-screen">
         <div className="relative w-3/4 h-5/6 bg-gray-200 rounded-2xl group">
           <video
@@ -95,7 +81,7 @@ export function VideoSlides() {
             muted
             loop
             crossOrigin="anonymous"
-            className="w-full h-full object-cover shadow-xl rounded-2xl transition-transform transform hover:scale-105 delay-150 ease-in-out hover:shadow-2xl hover:shadow-[#111111]"
+            className="w-full h-full object-cover rounded-2xl transition-transform transform scale-105 shadow-md shadow-[#111111] delay-150 ease-in-out"
           >
             <source src={videoLinks[index].url} type="video/mp4"></source>
             Your browser does not support the video tag.
@@ -113,11 +99,11 @@ export function VideoSlides() {
           <div className="absolute top-[90%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 font-semibold text-md text-slate-200 w-auto flex mt-2 mb-8 justify-center items-center">
             <button
               onClick={() => handleClick(index)}
-              className="p-4 bg-blue-600 transition-transform hover:scale-110 hover:bg-blue-700 text-white shadow-md shadow-[#111111] rounded-xl"
+              className="p-4 bg-slate-400 transition-transform hover:scale-110 hover:bg-slate-500 text-white shadow-md shadow-[#111111] rounded-xl"
             >
               Use this
             </button>
-            <button className="ml-8 p-4 bg-blue-600 transition-transform hover:scale-110 hover:bg-blue-700 text-white shadow-md shadow-[#111111] rounded-xl">
+            <button className="ml-8 p-4 bg-slate-400 transition-transform hover:scale-110 hover:bg-slate-500 text-white shadow-md shadow-[#111111] rounded-xl">
               Upvote
             </button>
           </div>

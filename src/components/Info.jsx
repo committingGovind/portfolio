@@ -1,8 +1,17 @@
+import { useNavigate } from "react-router-dom";
+
 export function Info() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex items-center justify-center mt-36">
       <div>
-        <button className="bg-blue-600 text-white text-2xl rounded-lg p-4 m-4 transition-transform hover:scale-110 hover:bg-blue-700 hover:text-white delay-100 ease-in-out">
+        <button
+          onClick={() => {
+            navigate("/aboutme");
+          }}
+          className="bg-blue-600 text-white text-2xl rounded-lg p-4 m-4 transition-transform hover:scale-110 hover:bg-blue-700 hover:text-white delay-100 ease-in-out"
+        >
           About Me!
         </button>
       </div>
